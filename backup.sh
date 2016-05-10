@@ -90,7 +90,7 @@ rm -r $DIR/backup/$FILE_NAME
 
 # Send the file to the backup drive or S3
 
-HEADER_DATE=$(date -u "+%a, %d %b %Y %T %z")
+HEADER_DATE="$(LC_ALL=C date -u +"%a, %d %b %Y %X %z")"
 CONTENT_MD5=$(openssl dgst -md5 -binary $DIR/backup/$ARCHIVE_NAME | openssl enc -base64)
 CONTENT_TYPE="application/x-compressed-tar"
 STRING_TO_SIGN="PUT\n$CONTENT_MD5\n$CONTENT_TYPE\n$HEADER_DATE\n/$S3_BUCKET/$ARCHIVE_NAME"
